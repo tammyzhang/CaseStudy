@@ -1,0 +1,94 @@
+<!--
+    <ion-menu side="right" [content]="content">
+    <ion-toolbar>
+        <ion-title>Filter</ion-title>
+    </ion-toolbar>
+    <ion-content class="out-content">
+         <ion-item class="sort">
+            <ul>
+                <li>时间</li>
+                <li>收藏</li>
+                <li>访问</li>
+            </ul>
+            <button item-right>
+                <ion-icon name="funnel"></ion-icon>
+            </button>
+        </ion-item>
+       
+        
+        <div>
+            <ion-segment [(ngModel)]="pet">
+                <ion-segment-button value="modailty">
+                    设备类型
+                </ion-segment-button>
+                <ion-segment-button value="bodyPart">
+                    检查部位
+                </ion-segment-button>
+                <ion-segment-button value="disease">
+                    疾病种类
+                </ion-segment-button>
+            </ion-segment>
+        </div>
+
+        <div [ngSwitch]="pet">
+            <ion-list *ngSwitchWhen="'modailty'">
+                <ion-list>
+                    <ion-item *ngFor="#modalityItem of modalities">
+                        <ion-label>{{modalityItem.name}}</ion-label>
+                        <ion-checkbox dark checked="{{modalityItem.checked}}" value="{{modalityItem.id}}" (click)="setCheckedInfo(modalityItem.id)"></ion-checkbox>
+                    </ion-item>
+                </ion-list>
+            </ion-list>
+
+            <ion-list *ngSwitchWhen="'bodyPart'">
+                <ion-list radio-group>
+                    <ion-list-header>
+                        Language
+                    </ion-list-header>
+
+                    <ion-item>
+                        <ion-label>Go</ion-label>
+                        <ion-radio checked="true" value="go"></ion-radio>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Rust</ion-label>
+                        <ion-radio value="rust"></ion-radio>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Python</ion-label>
+                        <ion-radio value="python" disabled="true"></ion-radio>
+                    </ion-item>
+                </ion-list>
+
+            </ion-list>
+            <ion-list *ngSwitchWhen="'disease'">
+                <ion-list>
+                    <ion-item>
+                        <ion-label>Tyrion Lannister</ion-label>
+                        <ion-checkbox secondary></ion-checkbox>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Sansa Stark</ion-label>
+                        <ion-checkbox danger checked="true"></ion-checkbox>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Catelyn Stark</ion-label>
+                        <ion-checkbox secondary checked="true"></ion-checkbox>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Bronn</ion-label>
+                        <ion-checkbox royal></ion-checkbox>
+                    </ion-item>
+                </ion-list>
+            </ion-list>
+
+        </div>
+    </ion-content>
+</ion-menu>
+-->
+
+<ion-nav id="nav" [root]="rootPage" #content swipe-back-enabled="false"></ion-nav>

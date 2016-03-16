@@ -1,0 +1,27 @@
+<ion-content>
+    <div class="contentBackground">
+
+        <div text-center class="home-info">
+            <ion-icon name="school" [hidden]="hasSearchContent"></ion-icon>
+            <ion-searchbar class="searchBar" primary [(ngModel)]="queryText" (keyup.enter)="goToCaseList()" (keyup)="onKeyup()" (cancel)="onCancel()"
+            (focus)="onFocus()" (blur)="onBlur()" placeholder="Search">
+            </ion-searchbar>
+            <!--<button (click)="goToCaseList()">search</button>-->
+            <div [hidden]="!hasSearchContent">
+                <ion-list>
+                    <ion-item *ngFor="#item of searchHitTop5Items" (click)="onSelectSearchHit(item)">
+                        <ion-icon name="clock" item-left></ion-icon>
+                        {{item}}
+                        <ion-icon name="create" item-right></ion-icon>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </div>
+</ion-content>
+
+<div class="searchWrapper" [hidden]="!isSearching">
+    <div class="loading">
+        <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+</div>

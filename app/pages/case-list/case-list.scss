@@ -1,0 +1,99 @@
+
+.case-list {
+
+  ion-card.onecase ion-card-header .item {
+    padding: 12px;
+  }
+
+  ion-card.onecase ion-card-content .list {
+    margin: 0;
+  }
+
+  ion-card.onecase ion-card-header,
+  ion-card.onecase ion-card-content,
+  ion-card.onecase ion-card-content .list ion-item-content, {
+    padding: 0;
+  }
+  #filter{
+     color:#387ef5;
+  }
+  img {
+      border-radius:0;
+  }
+  .sort{
+      float:left;
+  }
+  .pager{
+      float:right;
+  }
+  .sort ul, .pager ul{
+        height:30px; 
+      	display:block;
+        padding : 2px;
+        //background: lightgray;
+  }
+  
+  .sort ul li,  .pager ul li {
+     	list-style-type:none;   
+      	border:1px solid dodgerblue;
+      	background: white;
+        border-radius:5px;
+      	cursor:pointer; 
+      	height: 25px;
+      	line-height: 25px; 
+      	text-align: center;
+      	margin:0 5px;
+        padding: 0 5px;
+        color:dodgerblue;
+  }
+  .sort ul li{
+      	float:left; 
+  }  
+  .pager ul li {     	
+      	float:right;       
+  }
+  
+  .sort ul li:hover, .pager ul li:hover{
+      color: white;
+      background-color: dodgerblue;
+  }
+  
+  .sort ul li a, .pager ul li a{
+      text-decoration: none;
+  }
+  .sort ul li a:hover, .pager ul li a:hover {
+        color: white;
+        background-color: dodgerblue;
+  }
+
+  .filterButton{
+      width:50px;
+      height: 50px;
+      position:fixed;
+      top:5px;
+      right:5px;
+  }
+  .filter-infor{
+      background: #ccc;
+  }
+  .filter-Content{
+    position:relative;
+    margin-bottom: 120px;
+}
+    .filter-footer{
+         background: #fff;
+         position:fixed;
+         bottom: 0px;
+         margin: 0 auto;
+    }
+    
+    #pagination-clean li { border:0; margin:0; padding:0; font-size:11px; list-style:none; /* savers */ float:left; }
+    #pagination-clean a { border-right:solid 1px #DEDEDE; margin-right:2px; }
+    #pagination-clean .previous-off,
+    #pagination-clean .next-off { color:#888888; display:block; float:left; font-weight:bold; padding:3px 4px; }	
+    #pagination-clean .next a,#pagination-clean previous a { border:none; font-weight:bold; }	
+    #pagination-clean .active { color:#000000; font-weight:bold; display:block; float:left; padding:4px 6px; /* savers */ border-right:solid 1px #DEDEDE; }
+    #pagination-clean a:link,#pagination-clean a:visited  { color:#0e509e; display:block; float:left; padding:3px 6px; text-decoration:underline; }
+    #pagination-clean a:hover { text-decoration:none; }
+
+}

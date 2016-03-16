@@ -1,0 +1,190 @@
+<ion-navbar *navbar>
+    <ion-title>{{queryText}}</ion-title>
+    <ion-buttons end (click)="hiddenContentChange()">
+        <button>
+            <ion-icon name="funnel"></ion-icon>
+        </button>
+    </ion-buttons>
+</ion-navbar>
+
+<ion-content class="outer-content case-list">
+
+    <div [hidden]="!hiddenContent">
+        <ion-list-header>
+            总共找到 {{resultCount}} 个案例
+        </ion-list-header>
+        <ion-list-header [hidden]="resultCount===0">
+            <div class="sort">
+                <ul>
+                    <li>时间</li>
+                    <li>收藏</li>
+                    <li>访问</li>
+                </ul>
+
+            </div>
+            <div class="pager">
+                <ul>
+                    <li>
+                        <a href="#" title="下一页" (click)="goToNextPage()" ng-disabled="currentPageIndex===totalPageCount">
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </a>
+                    </li>
+                    <li><span>{{currentPageIndex}}</span>/{{totalPageCount}}</li>
+                    <li>
+                        <a href="#" title="上一页" (click)="goToPreviousPage()" ng-disabled="currentPageIndex===1">
+                            <ion-icon name="arrow-back"></ion-icon>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </ion-list-header>
+        <ion-card *ngFor="#case of filterredCaseList" class="onecase" (click)="goToCaseDetail(case)">
+            <ion-card-header>
+                <ion-item>
+                    <ion-thumbnail item-left>
+                        <img [src]=" urlBase+case.thumbnail" alt="No thumbnail">
+                    </ion-thumbnail>
+                    {{case.headline}}
+                </ion-item>
+            </ion-card-header>
+
+            <ion-card-content class="outer-content">
+                <p padding>{{case.description}}</p>
+            </ion-card-content>
+
+            <ion-item>
+                <label item-left>
+                    <ion-icon name="logo-twitter"></ion-icon>
+                    {{case.timestamp.createTime}}
+                </label>
+                <label item-right>
+                    <ion-icon name="share"></ion-icon>
+                    {{case.viewTimes}}
+                </label>
+            </ion-item>
+
+        </ion-card>
+        <!--<ion-list-header [hidden]="resultCount>0">
+            No Cases Found
+        </ion-list-header>
+        <ion-list-header [hidden]="errorMessage">
+            {{errorMessage}}
+        </ion-list-header>
+        <ion-list-header>
+            <div>
+                <ul id="pagination-clean">
+                    <li class="previous-off">&laquo; Previous</li>
+                    <li class="active">1</li>
+                    <li><a href="javascript:void(0);">2</a></li>
+                    <li><a href="javascript:void(0);">3</a></li>
+                    <li><a href="javascript:void(0);">4</a></li>
+                    <li><a href="javascript:void(0);">5</a></li>
+                    <li><a href="javascript:void(0);">6</a></li>
+                    <li><a href="javascript:void(0);">7</a></li>
+                    <li class="next"><a href="javascript:void(0);">Next &raquo;</a></li>
+                </ul>
+            </div>
+
+        </ion-list-header>-->
+    </div>
+
+
+    <!-- filter content-->
+    <div padding class="filter-infor" [hidden]="hiddenContent">
+
+        <div class="filter-Content">
+            <div>
+                <ion-segment [(ngModel)]="filter">
+                    <ion-segment-button value="modailty">
+                        设备类型
+                    </ion-segment-button>
+                    <ion-segment-button value="bodyPart">
+                        检查部位
+                    </ion-segment-button>
+                    <ion-segment-button value="disease">
+                        疾病种类
+                    </ion-segment-button>
+                </ion-segment>
+            </div>
+
+            <div [ngSwitch]="filter">
+                <ion-list *ngSwitchWhen="'modailty'">
+                    <ion-list>
+                        <ion-item *ngFor="#modalityItem of modalityConditions">
+                            <ion-label>{{modalityItem.name}}</ion-label>
+                            <ion-checkbox dark checked="{{modalityItem.isChecked}}" value="{{modalityItem.id}}" (click)="setCheckedInfo(modalityItem.id)"></ion-checkbox>
+                        </ion-item>
+                    </ion-list>
+                </ion-list>
+
+                <ion-list *ngSwitchWhen="'bodyPart'">
+                    <ion-list radio-group>
+                        <ion-list-header>
+                            Language
+                        </ion-list-header>
+
+                        <ion-item>
+                            <ion-label>Go</ion-label>
+                            <ion-radio checked="true" value="go"></ion-radio>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label>Rust</ion-label>
+                            <ion-radio value="rust"></ion-radio>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label>Python</ion-label>
+                            <ion-radio value="python" disabled="true"></ion-radio>
+                        </ion-item>
+                    </ion-list>
+
+                </ion-list>
+                <ion-list *ngSwitchWhen="'disease'">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label>Tyrion Lannister</ion-label>
+                            <ion-checkbox secondary></ion-checkbox>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label>Sansa Stark</ion-label>
+                            <ion-checkbox danger checked="true"></ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Catelyn Stark</ion-label>
+                            <ion-checkbox secondary checked="true"></ion-checkbox>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label>Bronn</ion-label>
+                            <ion-checkbox royal></ion-checkbox>
+                        </ion-item>
+                    </ion-list>
+                </ion-list>
+
+            </div>
+
+        </div>
+
+        <div class="filter-footer">
+            <ion-item>
+                <button item-left (click)="filterCaseData()">
+                    <ion-icon name='home'></ion-icon>
+                    确认
+                </button>
+                <button item-right (click)="resetConditions()">
+                    <ion-icon name='home'></ion-icon>
+                    重置
+                </button>
+            </ion-item>
+        </div>
+    </div>
+
+</ion-content>
+
+<div class="searchWrapper" [hidden]="!isSearching"> 
+    <div class="loading">
+        <ion-spinner name="bubbles"></ion-spinner>
+    </div>      
+</div>
